@@ -1,0 +1,66 @@
+var xAxisData = [];
+var data1 = [];
+var data2 = [];
+for (var i = 0; i < 20; i++) {
+    xAxisData.push('季度' + (i+1));
+    data1.push((Math.sin(i / 5) * (i / 5 -10) + i / 6) * 5);
+    data2.push((Math.cos(i / 5) * (i / 5 -10) + i / 6) * 5);
+}
+
+option = {
+    title: {
+        text: '需求变化率'
+    },
+    legend: {
+        data: ['需求量', '需求变化率'],
+        align: 'left',
+        textStyle:{    //图例文字的样式
+        color:'#333',
+        fontSize:26
+    }
+    },
+    toolbox: {
+        // y: 'bottom',
+        feature: {
+            magicType: {
+                type: ['stack', 'tiled']
+            },
+            dataView: {},
+            saveAsImage: {
+                pixelRatio: 2
+            }
+        }
+    },
+    tooltip: {},
+    xAxis: {
+        data: xAxisData,
+        silent: false,
+        splitLine: {
+            show: false
+        },
+        textStyle:{    //图例文字的样式
+        fontSize:26
+    }
+    },
+    yAxis: {
+    },
+    series: [{
+        name: '需求量',
+        type: 'bar',
+        data: data1,
+        animationDelay: function (idx) {
+            return idx * 10;
+        }
+    }, {
+        name: '需求变化率',
+        type: 'bar',
+        data: data2,
+        animationDelay: function (idx) {
+            return idx * 10 + 100;
+        }
+    }],
+    animationEasing: 'elasticOut',
+    animationDelayUpdate: function (idx) {
+        return idx * 5;
+    }
+};
